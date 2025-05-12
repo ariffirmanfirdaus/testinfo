@@ -161,10 +161,11 @@ body {
     width: 80px;
     height: 100px;
     border-radius: 50%;
-    animation: float 8s linear infinite;
+    animation: float 8s linear forwards;
     z-index: 1;
     bottom: -100px;
     transform: translate3d(0,0,0);
+    opacity: 0.8;
 }
 
 @keyframes flicker {
@@ -209,11 +210,11 @@ body {
 @keyframes float {
     0% {
         transform: translateY(100vh) rotate(0deg);
-        opacity: 0.5;
+        opacity: 0.8;
     }
     100% {
-        transform: translateY(-100vh) rotate(360deg);
-        opacity: 1;
+        transform: translateY(-120vh) rotate(360deg);
+        opacity: 0;
     }
 }
 
