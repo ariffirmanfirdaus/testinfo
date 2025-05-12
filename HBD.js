@@ -1,83 +1,61 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Fixed balloons container for WhatsApp
-    const container = document.getElementById('balloons-container') || document.body;
+document.addEventListener('DOMContentLoaded', () => {
+    // Balloon Generator
+    const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff'];
+    const container = document.getElementById('balloons-container');
     
-    // Create floating balloons
-    const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
-    
-    // Function to create balloons
-    function createBalloons() {
-        // Clear existing balloons
-        container.innerHTML = '';
+    function createBalloon() {
+        const balloon = document.createElement('div');
+        balloon.className = 'balloon';
         
-        // Create new balloons
-        for (let i = 0; i < 15; i++) {
-            const balloon = document.createElement('div');
-            balloon.className = 'balloon';
-            
-            // Random properties
-            const size = Math.random() * 60 + 40;
-            const color = colors[Math.floor(Math.random() * colors.length)];
-            const left = Math.random() * 100;
-            const delay = Math.random() * 5;
-            const duration = Math.random() * 4 + 6;
-            
-            // Apply styles
-            balloon.style.width = `${size}px`;
-            balloon.style.height = `${size * 1.3}px`;
-            balloon.style.background = `radial-gradient(circle at 30% 30%, #ffffff, ${color})`;
-            balloon.style.left = `${left}%`;
-            balloon.style.top = `${Math.random() * 100 + 50}%`;
-            balloon.style.animationDelay = `${delay}s`;
-            balloon.style.animationDuration = `${duration}s`;
-            
-            // Add string to balloon
-            const string = document.createElement('div');
-            string.style.position = 'absolute';
-            string.style.width = '2px';
-            string.style.height = `${size}px`;
-            string.style.background = '#ccc';
-            string.style.bottom = `-${size}px`;
-            string.style.left = '50%';
-            string.style.transform = 'translateX(-50%)';
-            
-            balloon.appendChild(string);
-            container.appendChild(balloon);
-        }
+        balloon.style.cssText = `
+            left: ${Math.random() * 100}%;
+            top: ${Math.random() * 100}%;
+            background: ${colors[Math.floor(Math.random() * colors.length)]};
+            animation: float ${6 + Math.random() * 4}s infinite;
+        `;
+        
+        container.appendChild(balloon);
     }
-    
-    // Initial creation
-    createBalloons();
-    
-    // Recreate balloons every minute (for WhatsApp compatibility)
-    setInterval(createBalloons, 60000);
-    
-    // Enhanced flame animation
+
+    // Create initial balloons
+    for(let i = 0; i < 15; i++) {
+        createBalloon();
+    }
+
+    // Flame Animation
     const flame = document.querySelector('.flame');
+    let angle = 0;
     
-    function updateFlame(e) {
-        const x = e ? e.clientX / window.innerWidth : 0.5;
-        const y = e ? e.clientY / window.innerHeight : 0.5;
-        
-        const xOffset = (x - 0.5) * 20;
-        const yOffset = (y - 0.5) * 20;
-        
-        flame.style.transform = `translateX(-50%) translate(${xOffset}px, ${yOffset}px)`;
-        flame.style.height = `${40 + yOffset}px`;
+    function animateFlame() {
+        angle += 0.05;
+        flame.style.transform = `
+            translateX(-50%)
+            rotate(${Math.sin(angle) * 2}deg)
+            scale(${1 + Math.sin(angle) * 0.1})
+        `;
+        requestAnimationFrame(animateFlame);
     }
     
-    document.addEventListener('mousemove', updateFlame);
-    
-    // Random flame movement when mouse isn't moving
-    setInterval(() => {
-        if (!flame.hasAttribute('data-last-move') || Date.now() - parseInt(flame.getAttribute('data-last-move')) > 2000) {
-            const randomX = Math.random() * 40 - 20;
-            const randomY = Math.random() * 20 - 10;
-            flame.style.transform = `translateX(-50%) translate(${randomX}px, ${randomY}px)`;
-        }
-    }, 100);
-    
-    document.addEventListener('mousemove', () => {
-        flame.setAttribute('data-last-move', Date.now());
+    animateFlame();
+
+    // Mobile Interaction
+    let lastTouch = 0;
+    document.addEventListener('touchmove', (e) => {
+        const touch = e.touches[0];
+        const x = touch.clientX / window.innerWidth;
+        const y = touch.clientY / window.innerHeight;
+        
+        flame.style.transform = `
+            translateX(-50%)
+            translate(${(x - 0.5) * 20}px, ${(y - 0.5) * 20}px)
+        `;
     });
+    
+    // Auto refresh balloons every minute
+    setInterval(() => {
+        container.innerHTML = '';
+        for(let i = 0; i < 15; i++) {
+            createBalloon();
+        }
+    }, 60000);
 });
