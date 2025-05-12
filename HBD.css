@@ -6,17 +6,20 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    font-family: 'Tektur', cursive;
+    font-family: 'Tektur', 'Arial', cursive;
     overflow: hidden;
 }
 
 .birthday-card {
     text-align: center;
     position: relative;
-    z-index: 1;
+    z-index: 2; /* Higher than balloons */
     width: 90%;
     max-width: 800px;
     padding: 2rem;
+    background-color: rgba(10, 10, 10, 0.7);
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(255, 0, 222, 0.3);
 }
 
 .neon-text {
@@ -31,17 +34,43 @@ body {
     margin: 0.5rem 0;
 }
 
+.age-container {
+    position: relative;
+    display: inline-block;
+    margin: 1rem 0;
+}
+
 .neon-age {
     color: #fff;
-    font-size: 5rem;
+    font-size: 6rem;
+    font-weight: bold;
+    text-shadow: 
+        0 0 10px #fff,
+        0 0 20px #fff,
+        0 0 30px #00fffc,
+        0 0 60px #00fffc,
+        0 0 90px #00fffc;
+    animation: flicker-blue 1.5s infinite alternate;
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(45deg, #0a0a0a 30%, #1a1a1a 100%);
+    padding: 0 20px;
+    border-radius: 15px;
+    box-shadow: 
+        0 0 20px rgba(0, 255, 252, 0.5),
+        inset 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+.neon-th {
+    color: #00fffc;
+    font-size: 2.5rem;
+    position: absolute;
+    top: 10px;
+    right: -15px;
     text-shadow: 
         0 0 5px #fff,
-        0 0 10px #fff,
-        0 0 20px #00fffc,
-        0 0 40px #00fffc,
-        0 0 80px #00fffc;
-    animation: flicker-blue 1.5s infinite alternate;
-    margin: 1rem 0;
+        0 0 10px #00fffc;
+    animation: flicker-blue 2s infinite alternate;
 }
 
 h1.neon-text {
@@ -172,27 +201,27 @@ p.neon-text {
 
 @keyframes flicker-flame {
     0%, 100% {
-        transform: scale(1) rotate(0deg);
+        transform: translateX(-50%) scale(1) rotate(0deg);
         opacity: 1;
     }
     50% {
-        transform: scale(1.1) rotate(2deg);
+        transform: translateX(-50%) scale(1.1) rotate(2deg);
         opacity: 0.9;
     }
 }
 
 @keyframes float-flame {
     0%, 100% {
-        transform: translateX(0) rotate(0deg);
+        transform: translateX(-50%) translateX(0) rotate(0deg);
     }
     25% {
-        transform: translateX(-3px) rotate(-2deg);
+        transform: translateX(-50%) translateX(-3px) rotate(-2deg);
     }
     50% {
-        transform: translateX(0) rotate(0deg);
+        transform: translateX(-50%) translateX(0) rotate(0deg);
     }
     75% {
-        transform: translateX(3px) rotate(2deg);
+        transform: translateX(-50%) translateX(3px) rotate(2deg);
     }
 }
 
@@ -203,6 +232,7 @@ p.neon-text {
     height: 80px;
     border-radius: 50%;
     animation: float 6s ease-in-out infinite;
+    z-index: 1;
 }
 
 @keyframes float {
@@ -211,5 +241,33 @@ p.neon-text {
     }
     50% {
         transform: translateY(-50px) rotate(5deg);
+    }
+}
+
+/* WhatsApp specific fixes */
+@media (max-width: 768px) {
+    .birthday-card {
+        padding: 1rem;
+    }
+    
+    h1.neon-text {
+        font-size: 2.5rem;
+    }
+    
+    .neon-age {
+        font-size: 4rem;
+    }
+    
+    .neon-th {
+        font-size: 1.8rem;
+        top: 5px;
+    }
+    
+    p.neon-text {
+        font-size: 1.2rem;
+    }
+    
+    .cake {
+        transform: scale(1);
     }
 }
