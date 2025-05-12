@@ -1,0 +1,149 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #0a0a0a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Tektur', cursive;
+    overflow: hidden;
+}
+
+.birthday-card {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.neon-text {
+    color: #fff;
+    text-shadow: 
+        0 0 5px #fff,
+        0 0 10px #fff,
+        0 0 20px #ff00de,
+        0 0 40px #ff00de,
+        0 0 80px #ff00de;
+    animation: flicker 1.5s infinite alternate;
+}
+
+h1.neon-text {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+p.neon-text {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+/* Cake styles */
+.cake {
+    position: relative;
+    width: 200px;
+    height: 150px;
+    margin: 0 auto;
+}
+
+.plate {
+    width: 240px;
+    height: 20px;
+    background: #ccc;
+    border-radius: 50%;
+    position: absolute;
+    bottom: -10px;
+    left: -20px;
+    box-shadow: 0 0 10px #fff;
+}
+
+.layer {
+    position: absolute;
+    width: 200px;
+    left: 0;
+    border-radius: 10px;
+}
+
+.bottom {
+    height: 60px;
+    background: linear-gradient(to right, #f9c5d1, #f2789f);
+    bottom: 0;
+}
+
+.middle {
+    height: 50px;
+    background: linear-gradient(to right, #f2789f, #f999b7);
+    bottom: 60px;
+}
+
+.top {
+    height: 40px;
+    background: linear-gradient(to right, #f999b7, #f9c5d1);
+    bottom: 110px;
+}
+
+.icing {
+    position: absolute;
+    width: 200px;
+    height: 15px;
+    background: #f9c5d1;
+    border-radius: 10px 10px 0 0;
+    bottom: 150px;
+    box-shadow: 0 10px 10px -5px rgba(0,0,0,0.2);
+}
+
+.candle {
+    position: absolute;
+    width: 10px;
+    height: 30px;
+    background: linear-gradient(to right, #ff9a9e, #fad0c4);
+    bottom: 165px;
+    left: 95px;
+    z-index: 10;
+}
+
+.flame {
+    position: absolute;
+    width: 15px;
+    height: 30px;
+    background: linear-gradient(to top, #ff7800, #fff);
+    border-radius: 50% 50% 20% 20%;
+    bottom: 30px;
+    left: -2.5px;
+    animation: flicker 0.5s infinite alternate;
+    box-shadow: 0 0 10px #ff7800, 0 0 20px #ff7800;
+}
+
+/* Animations */
+@keyframes flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+        text-shadow:
+            0 0 5px #fff,
+            0 0 10px #fff,
+            0 0 20px #ff00de,
+            0 0 40px #ff00de,
+            0 0 80px #ff00de;
+        box-shadow: 0 0 10px #ff7800, 0 0 20px #ff7800;
+    }
+    20%, 24%, 55% {
+        text-shadow: none;
+        box-shadow: none;
+    }
+}
+
+/* Floating balloons */
+.balloon {
+    position: absolute;
+    width: 60px;
+    height: 80px;
+    border-radius: 50%;
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-50px) rotate(5deg);
+    }
+}
