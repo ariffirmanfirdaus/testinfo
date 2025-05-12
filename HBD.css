@@ -244,6 +244,49 @@ p.neon-text {
     }
 }
 
+/* Tambahkan ini di HBD.css */
+.age-container {
+    position: relative;
+    margin: 20px 0;
+}
+
+.neon-age {
+    font-size: 6rem;
+    color: #ff69b4;
+    text-shadow: 
+        0 0 10px #ff69b4,
+        0 0 20px #ff1493,
+        0 0 30px #ff00ff;
+    animation: neonPulse 1.5s infinite alternate;
+}
+
+.neon-th {
+    font-size: 2rem;
+    position: absolute;
+    top: 15px;
+    right: -25px;
+    color: #00ffff;
+    text-shadow: 
+        0 0 10px #00ffff,
+        0 0 20px #00bfff;
+}
+
+@keyframes neonPulse {
+    from {
+        opacity: 0.8;
+        text-shadow: 
+            0 0 5px #ff69b4,
+            0 0 10px #ff1493;
+    }
+    to {
+        opacity: 1;
+        text-shadow: 
+            0 0 20px #ff69b4,
+            0 0 30px #ff1493,
+            0 0 40px #ff00ff;
+    }
+}
+
 /* WhatsApp specific fixes */
 @media (max-width: 768px) {
     .birthday-card {
