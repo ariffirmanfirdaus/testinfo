@@ -1,25 +1,22 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: #0a0a0a;
+    background: #0a0a0a;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    font-family: 'Tektur', 'Arial', cursive;
+    font-family: 'Tektur', cursive;
     overflow: hidden;
 }
 
 .birthday-card {
     text-align: center;
     position: relative;
-    z-index: 2; /* Higher than balloons */
+    z-index: 2;
     width: 90%;
     max-width: 800px;
     padding: 2rem;
-    background-color: rgba(10, 10, 10, 0.7);
-    border-radius: 20px;
-    box-shadow: 0 0 30px rgba(255, 0, 222, 0.3);
 }
 
 .neon-text {
@@ -37,67 +34,43 @@ body {
 .age-container {
     position: relative;
     display: inline-block;
-    margin: 1rem 0;
+    margin: 2rem 0;
 }
 
 .neon-age {
-    color: #fff;
     font-size: 6rem;
-    font-weight: bold;
+    color: #00fffc;
     text-shadow: 
-        0 0 10px #fff,
-        0 0 20px #fff,
-        0 0 30px #00fffc,
-        0 0 60px #00fffc,
-        0 0 90px #00fffc;
-    animation: flicker-blue 1.5s infinite alternate;
-    position: relative;
-    z-index: 1;
-    background: linear-gradient(45deg, #0a0a0a 30%, #1a1a1a 100%);
-    padding: 0 20px;
-    border-radius: 15px;
-    box-shadow: 
-        0 0 20px rgba(0, 255, 252, 0.5),
-        inset 0 0 15px rgba(255, 255, 255, 0.2);
+        0 0 10px #00fffc,
+        0 0 20px #00b3ff,
+        0 0 30px #0066ff;
+    animation: neonPulse 1.5s infinite alternate;
 }
 
 .neon-th {
-    color: #00fffc;
     font-size: 2.5rem;
     position: absolute;
-    top: 10px;
-    right: -15px;
+    top: -15px;
+    right: -25px;
+    color: #ff00de;
     text-shadow: 
-        0 0 5px #fff,
-        0 0 10px #00fffc;
-    animation: flicker-blue 2s infinite alternate;
+        0 0 10px #ff00de,
+        0 0 20px #ff0099;
 }
 
-h1.neon-text {
-    font-size: 4rem;
-    margin-bottom: 0;
-}
-
-p.neon-text {
-    font-size: 1.8rem;
-    margin-bottom: 2rem;
-}
-
-/* Cake container */
 .cake-container {
-    margin: 2rem auto;
+    margin: 3rem auto;
     position: relative;
     width: 100%;
     max-width: 400px;
 }
 
-/* Cake styles */
 .cake {
     position: relative;
-    width: 100%;
-    height: 200px;
+    width: 200px;
+    height: 150px;
     margin: 0 auto;
-    transform: scale(1.2);
+    transform: scale(1.3);
 }
 
 .plate {
@@ -165,12 +138,21 @@ p.neon-text {
     border-radius: 50% 50% 20% 20%;
     bottom: 40px;
     left: -2.5px;
-    animation: flicker-flame 0.1s infinite alternate, float-flame 3s ease-in-out infinite;
+    animation: flameMove 0.1s infinite alternate;
     box-shadow: 0 0 15px #ff7800, 0 0 30px #ff7800;
     transform-origin: center bottom;
+    transition: all 0.1s ease-out;
 }
 
-/* Animations */
+.balloon {
+    position: absolute;
+    width: 60px;
+    height: 80px;
+    border-radius: 50%;
+    animation: float 6s ease-in-out infinite;
+    z-index: 1;
+}
+
 @keyframes flicker {
     0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
         text-shadow:
@@ -185,54 +167,29 @@ p.neon-text {
     }
 }
 
-@keyframes flicker-blue {
-    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
-        text-shadow:
-            0 0 5px #fff,
-            0 0 10px #fff,
-            0 0 20px #00fffc,
-            0 0 40px #00fffc,
-            0 0 80px #00fffc;
+@keyframes neonPulse {
+    from {
+        opacity: 0.8;
+        text-shadow: 
+            0 0 5px #00fffc,
+            0 0 10px #00b3ff;
     }
-    20%, 24%, 55% {
-        text-shadow: none;
+    to {
+        opacity: 1;
+        text-shadow: 
+            0 0 20px #00fffc,
+            0 0 30px #00b3ff,
+            0 0 40px #0066ff;
     }
 }
 
-@keyframes flicker-flame {
+@keyframes flameMove {
     0%, 100% {
         transform: translateX(-50%) scale(1) rotate(0deg);
-        opacity: 1;
     }
     50% {
         transform: translateX(-50%) scale(1.1) rotate(2deg);
-        opacity: 0.9;
     }
-}
-
-@keyframes float-flame {
-    0%, 100% {
-        transform: translateX(-50%) translateX(0) rotate(0deg);
-    }
-    25% {
-        transform: translateX(-50%) translateX(-3px) rotate(-2deg);
-    }
-    50% {
-        transform: translateX(-50%) translateX(0) rotate(0deg);
-    }
-    75% {
-        transform: translateX(-50%) translateX(3px) rotate(2deg);
-    }
-}
-
-/* Floating balloons */
-.balloon {
-    position: absolute;
-    width: 60px;
-    height: 80px;
-    border-radius: 50%;
-    animation: float 6s ease-in-out infinite;
-    z-index: 1;
 }
 
 @keyframes float {
@@ -244,73 +201,15 @@ p.neon-text {
     }
 }
 
-/* Tambahkan ini di HBD.css */
-.age-container {
-    position: relative;
-    margin: 20px 0;
-}
-
-.neon-age {
-    font-size: 6rem;
-    color: #ff69b4;
-    text-shadow: 
-        0 0 10px #ff69b4,
-        0 0 20px #ff1493,
-        0 0 30px #ff00ff;
-    animation: neonPulse 1.5s infinite alternate;
-}
-
-.neon-th {
-    font-size: 2rem;
-    position: absolute;
-    top: 15px;
-    right: -25px;
-    color: #00ffff;
-    text-shadow: 
-        0 0 10px #00ffff,
-        0 0 20px #00bfff;
-}
-
-@keyframes neonPulse {
-    from {
-        opacity: 0.8;
-        text-shadow: 
-            0 0 5px #ff69b4,
-            0 0 10px #ff1493;
-    }
-    to {
-        opacity: 1;
-        text-shadow: 
-            0 0 20px #ff69b4,
-            0 0 30px #ff1493,
-            0 0 40px #ff00ff;
-    }
-}
-
-/* WhatsApp specific fixes */
 @media (max-width: 768px) {
-    .birthday-card {
-        padding: 1rem;
-    }
-    
-    h1.neon-text {
-        font-size: 2.5rem;
-    }
-    
     .neon-age {
         font-size: 4rem;
     }
-    
     .neon-th {
         font-size: 1.8rem;
-        top: 5px;
+        top: -10px;
     }
-    
-    p.neon-text {
-        font-size: 1.2rem;
-    }
-    
     .cake {
         transform: scale(1);
     }
-}
+    }
